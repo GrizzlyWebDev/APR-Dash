@@ -21,7 +21,22 @@
     <v-main>
       <div>
         <router-view />
-        <vue-particles color="#dedede"></vue-particles>
+        <vue-particles
+        color="#ff6148"
+        :particleOpacity="0.7"
+        :particlesNumber="120"
+        shapeType="circle"
+        :particleSize="2"
+        linesColor="#ff6148"
+        :linesWidth=".8"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="100"
+        :moveSpeed="1"
+        :hoverEffect="false"
+        :clickEffect="false"
+      >
+      </vue-particles>
       </div>
     </v-main>
     <v-navigation-drawer

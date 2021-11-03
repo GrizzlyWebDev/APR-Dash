@@ -118,8 +118,6 @@
               }}</v-card-text>
             </v-card>
           </v-col>
-        </v-row>
-      </v-col>
       <v-col col="12" lg="6">
         <v-card
           class="card-gradient"
@@ -220,6 +218,8 @@
         >
         </v-data-table>
       </v-col>
+    </v-row>
+    </v-col>
     </v-row>
   </v-container>
 </template>

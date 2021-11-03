@@ -43,7 +43,7 @@
             <v-list-item-icon>
               <v-icon>mdi-web</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Apollo Rebase Website</v-list-item-title>
+            <v-list-item-title>APR Website</v-list-item-title>
           </v-list-item>
           <router-link to="/">
             <v-list-item>

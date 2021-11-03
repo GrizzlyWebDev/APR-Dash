@@ -49,7 +49,7 @@ export default {
   z-index:10;
   width:100%;
   height:100%;
-  background-color: linear-gradient(to top, #181920 55%, #2c2e3a 100%);;
+  background-color: #2c2e3a;
   position: fixed;
 }
 

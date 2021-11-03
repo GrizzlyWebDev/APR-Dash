@@ -2,15 +2,15 @@
   <v-app>
     <Spinner />
     <v-app-bar app elevate-on-scroll color="#2c2e3a" dark>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center my-5">
         <v-img
           alt="Shibx"
           contain
-          max-height="200px"
+          max-height="250px"
           max-width="90"
           src="../public/img/icons/apolloLogo.png"
         />
-        <h2 style="font-size: 1.3em">{{ title }}</h2>
+        <h2>{{ title }}</h2>
       </div>
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon
@@ -35,7 +35,7 @@
       color="#2c2e3a"
     >
       <v-list-item>
-        <v-img src="../public/img/icons/apolloLogo.png"></v-img>
+        <v-img contain src="../public/img/icons/apolloLogo.png"></v-img>
       </v-list-item>
       <v-list nav>
         <v-list-item-group v-model="group" active-class="secondary--text">

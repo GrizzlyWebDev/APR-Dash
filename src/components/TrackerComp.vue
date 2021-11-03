@@ -53,7 +53,7 @@
               :loading="loading"
             >
               <v-card-title class="headline font-weight-bold"
-                >Apollo Rebase Total Balance
+                >Apollo Rebase Balance
               </v-card-title>
               <v-card-text class="c-card__text text-weight-600"
                 >{{ balance }}

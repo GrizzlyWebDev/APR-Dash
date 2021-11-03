@@ -61,7 +61,7 @@
             <v-list-item-title>APR Website</v-list-item-title>
           </v-list-item>
           <router-link to="/">
-            <v-list-item>
+            <v-list-item class="my-2">
               <v-list-item-icon>
                 <v-icon>mdi-chart-tree</v-icon>
               </v-list-item-icon>

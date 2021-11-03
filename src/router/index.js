@@ -25,8 +25,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next) => {
-document.title = to.name
-next()
-})
+  document.title = to.name
+  window.title = next.name
+  next()
+  })
 
 export default router

@@ -26,12 +26,12 @@ module.exports = {
   },
   pwa: {
     name: "Apollo Rebase Dashboard",
-    themeColor: "#4d0aaf",
-    msTileColor: "#4d0aaf",
+    themeColor: "#2c2e3a",
+    msTileColor: "#2c2e3a",
     appleMobileWebAppCapable: "yes",
-    appleMobileWebAppStatusBarStyle: "#4d0aaf",
+    appleMobileWebAppStatusBarStyle: "#2c2e3a",
     manifestOptions: {
-      background_color: "#4d0aaf",
+      background_color: "#2c2e3a",
     },
   },
 };

@@ -64,49 +64,46 @@
               </v-card-text>
             </v-card>
           </v-col>
-         <v-col cols="12" md="6" >
-              <v-card
-                class="card-gradient"
-                dark
-                color="#ffffff"
-                elevation="10"
-                :loading="loading"
-              >
-                <v-card-title class="headline font-weight-bold">
-                  BUSD Dividends
+          <v-col cols="12" md="6">
+            <v-card
+              class="card-gradient"
+              dark
+              color="#ffffff"
+              elevation="10"
+              :loading="loading"
+            >
+              <v-card-title class="headline font-weight-bold">
+                BUSD Dividends
               </v-card-title>
-                <v-card-text class="c-card__text"
-                  >{{ earnedUsd }}
-                  <span class="paragraph">*</span></v-card-text
-                >
-              </v-card>
-            </v-col>
-            <v-col cols="12" md="6" >
-              <v-card
-                class="card-gradient"
-                dark
-                color="#ffffff"
-                elevation="10"
-                :loading="loading"
+              <v-card-text class="c-card__text"
+                >{{ earnedUsd }} <span class="paragraph">*</span></v-card-text
               >
-                <v-card-title class="headline font-weight-bold">
-                  Last Dividend
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card
+              class="card-gradient"
+              dark
+              color="#ffffff"
+              elevation="10"
+              :loading="loading"
+            >
+              <v-card-title class="headline font-weight-bold">
+                Last Dividend
               </v-card-title>
-                <v-card-text class="c-card__text text-weight-600"
-                  >{{ latestReward }}
-                </v-card-text>
-                <v-card-text v-if="{ earned } !== 0" class="c-card__text text-weight-600">
-                  <a 
-                  :href ="url"
-                  target="_blank"
-                  >View Transaction
-                  </a>
-                </v-card-text>
-              </v-card>
-         </v-col>
-         </v-row>
-          
-        
+              <v-card-text class="c-card__text text-weight-600"
+                >{{ latestReward }}
+              </v-card-text>
+              <v-card-text
+                v-if="{ earned } !== 0"
+                class="c-card__text text-weight-600"
+              >
+                <a :href="url" target="_blank">View Transaction </a>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+
         <v-row>
           <v-col>
             <p class="caption text-start">
@@ -186,12 +183,10 @@ export default {
   }),
 
   mounted() {
-    if(localStorage.wallet) {
+    if (localStorage.wallet) {
       this.wallet = localStorage.wallet;
       this.submitForm();
     }
-      
-    
   },
   methods: {
     row_classes(item) {
@@ -226,39 +221,43 @@ export default {
         localStorage.wallet = "";
         return;
       }
-        localStorage.wallet = this.wallet;
+      localStorage.wallet = this.wallet;
 
-        this.loading = true;
-        let txs = await inFlowTxs(this.wallet);
-       
-          let txsData = [];
-            txs.data.data.ethereum.transfers.map(async (txItem) => {
-              let txRow = {
-                  type: "buy",
-                  hash: txItem.transaction.hash,
-                  transferAmount: this.numberWithCommas(parseFloat(txItem.amount).toFixed(2)),
-                  timestamp: txItem.block.timestamp.time,
-                  block: txItem.block.height,
-                  currency: txItem.currency.symbol,
-                }
-              txsData.push(txRow);
-            });
-        let txsOut = await outFlowTxs(this.wallet);
-          txsOut.data.data.ethereum.transfers.map(async (txItem) => {
-              let txRow = {
-                  type: "sell",
-                  hash: txItem.transaction.hash,
-                  transferAmount: this.numberWithCommas(parseFloat(txItem.amount *-1).toFixed(2)),
-                  timestamp: txItem.block.timestamp.time,
-                  block: txItem.block.height,
-                  currency: txItem.currency.symbol,
-                }
-              txsData.push(txRow);
-            });
-            let txsTable = txsData.sort(function (a, b) {
-              return new Date(b.timestamp) - new Date(a.timestamp);
-            });
-            this.txs = txsTable;
+      this.loading = true;
+      let txs = await inFlowTxs(this.wallet);
+
+      let txsData = [];
+      txs.data.data.ethereum.transfers.map(async (txItem) => {
+        let txRow = {
+          type: "buy",
+          hash: txItem.transaction.hash,
+          transferAmount: this.numberWithCommas(
+            parseFloat(txItem.amount).toFixed(2)
+          ),
+          timestamp: txItem.block.timestamp.time,
+          block: txItem.block.height,
+          currency: txItem.currency.symbol,
+        };
+        txsData.push(txRow);
+      });
+      let txsOut = await outFlowTxs(this.wallet);
+      txsOut.data.data.ethereum.transfers.map(async (txItem) => {
+        let txRow = {
+          type: "sell",
+          hash: txItem.transaction.hash,
+          transferAmount: this.numberWithCommas(
+            parseFloat(txItem.amount * -1).toFixed(2)
+          ),
+          timestamp: txItem.block.timestamp.time,
+          block: txItem.block.height,
+          currency: txItem.currency.symbol,
+        };
+        txsData.push(txRow);
+      });
+      let txsTable = txsData.sort(function (a, b) {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      this.txs = txsTable;
     },
     async fetchData() {
       let vm = this;
@@ -272,56 +271,60 @@ export default {
         localStorage.wallet = this.wallet;
 
         this.loading = true;
-            let balance = await getTokenBalanceWeb3(
-              "0x35E583bD317D611b51FEdAaaedcaC4a4ECe6C711",
-              vm.wallet.toLowerCase(),
-              9
-            );
-            let reward = await getRewardTxs(this.wallet.toLowerCase());
-            if (reward.data.data.ethereum.transfers.length != 0){
-              this.latestReward = (reward.data.data.ethereum.transfers[0].block.timestamp.time);
-              let latestTxnHash = (reward.data.data.ethereum.transfers[0].transaction.hash);
-              this.url = ("https://bscscan.com/tx/" + latestTxnHash);
-            } else {
-              this.latestReward = "No data Available";
-              this.latestTxnHash ="";
-              this.url = ("https://bscscan.com/token/0x35E583bD317D611b51FEdAaaedcaC4a4ECe6C711?a=" + this.wallet);
-            }
-            let earned = await getRewardTotal(reward);
-            let bnbToUsd = await getBnbToUsd();
-            let pair = "0xdD7ADC6554571771efC382C6420f96170491EacC";
-            let tokenToBnbResp = await getTokenToBnb(pair, balance);
+        let balance = await getTokenBalanceWeb3(
+          "0x35E583bD317D611b51FEdAaaedcaC4a4ECe6C711",
+          vm.wallet.toLowerCase(),
+          9
+        );
+        let reward = await getRewardTxs(this.wallet.toLowerCase());
+        if (reward.data.data.ethereum.transfers.length != 0) {
+          this.latestReward =
+            reward.data.data.ethereum.transfers[0].block.timestamp.time;
+          let latestTxnHash =
+            reward.data.data.ethereum.transfers[0].transaction.hash;
+          this.url = "https://bscscan.com/tx/" + latestTxnHash;
+        } else {
+          this.latestReward = "No data Available";
+          this.latestTxnHash = "";
+          this.url =
+            "https://bscscan.com/token/0x35E583bD317D611b51FEdAaaedcaC4a4ECe6C711?a=" +
+            this.wallet;
+        }
+        let earned = await getRewardTotal(reward);
+        let bnbToUsd = await getBnbToUsd();
+        let pair = "0xdD7ADC6554571771efC382C6420f96170491EacC";
+        let tokenToBnbResp = await getTokenToBnb(pair, balance);
 
-            let tokenToBnb = tokenToBnbResp.price;
-            let exchangeVal = tokenToBnbResp.exchangeVal;
+        let tokenToBnb = tokenToBnbResp.price;
+        let exchangeVal = tokenToBnbResp.exchangeVal;
 
-            if (tokenToBnb == null) {
-              return;
-            }
-            let tokenToUsd = tokenToBnb * bnbToUsd;
+        if (tokenToBnb == null) {
+          return;
+        }
+        let tokenToUsd = tokenToBnb * bnbToUsd;
 
-            let balanceUsd = (balance * tokenToUsd).toFixed(2);
+        let balanceUsd = (balance * tokenToUsd).toFixed(2);
 
-            let exchangeValUsdt = exchangeVal * 0.98 * bnbToUsd;
+        let exchangeValUsdt = exchangeVal * 0.98 * bnbToUsd;
 
-            if (exchangeValUsdt > balanceUsd) {
-              exchangeValUsdt = balanceUsd;
-            }
-            
-            let tokenData = await this.getTokenData(balance, earned);
-            this.balanceUsd = tokenData.balanceUsd;
-            this.balance = tokenData.balance;
-            this.cap = tokenData.cap;
-            this.current = tokenData.current;
-            this.earnedUsd = (tokenData.earned).replace(/,/g, '');
-            this.earnedUsd = new Intl.NumberFormat("en-US", {
-                              style: "currency",
-                              currency: "USD",
-            }).format(this.earnedUsd),
-            this.loading = false;
-          } 
-      },
-    
+        if (exchangeValUsdt > balanceUsd) {
+          exchangeValUsdt = balanceUsd;
+        }
+
+        let tokenData = await this.getTokenData(balance, earned);
+        this.balanceUsd = tokenData.balanceUsd;
+        this.balance = tokenData.balance;
+        this.cap = tokenData.cap;
+        this.current = tokenData.current;
+        this.earnedUsd = tokenData.earned.replace(/,/g, "");
+        (this.earnedUsd = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(this.earnedUsd)),
+          (this.loading = false);
+      }
+    },
+
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },

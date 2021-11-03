@@ -3,8 +3,6 @@ $body-bg: linear-gradient(to top, #181920 55%, #2c2e3a 100%);
 $gradient: linear-gradient(to right, #83612a 55%, #b08744 100%);
 $font-size-root: 16px;
 
-
-
 $container-max-widths: (
   "xs": 430px,
   "md": 960px,
@@ -12,8 +10,7 @@ $container-max-widths: (
   "xl": 1140px,
 );
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 $font-family: "Poppins", sans-serif !default;
 
@@ -21,7 +18,7 @@ $font-family: "Poppins", sans-serif !default;
 .v-application .headline {
   font-family: $font-family !important;
 }
-@media screen and (max-width:425px) {
+@media screen and (max-width: 425px) {
   .v-btn__content {
     font-size: 12px !important;
   }
@@ -33,9 +30,9 @@ $font-family: "Poppins", sans-serif !default;
 
 h4,
 h3,
-h2, 
+h2,
 p,
-.v-list-item__subtitle{
+.v-list-item__subtitle {
   font-family: $font-family !important;
   color: #ffffff;
 }

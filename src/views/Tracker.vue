@@ -1,17 +1,17 @@
 <template>
-<v-container dark>
-  <TrackerComp />
-</v-container>
+  <v-container dark>
+    <TrackerComp />
+  </v-container>
 </template>
 
 <script>
-  import TrackerComp from '../components/TrackerComp.vue'
+import TrackerComp from '../components/TrackerComp.vue'
 
-  export default {
-    name: 'Crypto Island Tracker',
+export default {
+  name: 'Crypto Island Tracker',
 
-    components: {
-      TrackerComp
-    },
-  }
+  components: {
+    TrackerComp
+  },
+}
 </script>

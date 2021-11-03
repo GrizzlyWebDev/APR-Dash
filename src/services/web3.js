@@ -66,11 +66,11 @@ export async function getAllTokenTxs() {
         external
       }
     }
-  }`
+  }`;
   return await axios({
     method: "post",
     url: "https://graphql.bitquery.io",
-    data: { query},
+    data: { query },
     headers: {
       "X-API-KEY": "BQY0E3gOgjOfF6zvwmRiaL9sQOU0PMTj",
     },
@@ -130,8 +130,8 @@ transfers(options:{desc: "block.timestamp.time", limit: $limit, offset: $offset}
     receiver: wallet,
     from: null,
     till: null,
-    dateFormat: "%Y-%m"
-  }
+    dateFormat: "%Y-%m",
+  };
 
   return await axios({
     method: "post",
@@ -142,7 +142,7 @@ transfers(options:{desc: "block.timestamp.time", limit: $limit, offset: $offset}
     },
   });
 }
-export async function getShibTxs(wallet) {
+export async function getBUSDTxs(wallet) {
   let query = `
   query ($network: EthereumNetwork!,
           $address: String!,
@@ -191,8 +191,8 @@ transfers(options:{desc: "block.timestamp.time", limit: $limit, offset: $offset}
     currency: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
     from: null,
     till: null,
-    dateFormat: "%Y-%m"
-  }
+    dateFormat: "%Y-%m",
+  };
 
   return await axios({
     method: "post",
@@ -204,10 +204,14 @@ transfers(options:{desc: "block.timestamp.time", limit: $limit, offset: $offset}
   });
 }
 
-export function getRewardTotal(reward){
+export function getRewardTotal(reward) {
   var total = 0;
-  if (reward.data.data.ethereum.transfers.length != 0){
-    for (var idx=0; idx <= reward.data.data.ethereum.transfers.length-1; idx++) {
+  if (reward.data.data.ethereum.transfers.length != 0) {
+    for (
+      var idx = 0;
+      idx <= reward.data.data.ethereum.transfers.length - 1;
+      idx++
+    ) {
       total += reward.data.data.ethereum.transfers[idx].amount;
     }
   } else {
@@ -286,7 +290,15 @@ external
 }
 }
 }`;
-  let variables = {"offset":0,"network":"bsc","address":wallet,"currency":"","from":null,"till":null,"dateFormat":"%Y-%m"}
+  let variables = {
+    offset: 0,
+    network: "bsc",
+    address: wallet,
+    currency: "",
+    from: null,
+    till: null,
+    dateFormat: "%Y-%m",
+  };
 
   return await axios({
     method: "post",
@@ -332,7 +344,14 @@ external
 }
 }
   `;
-  let variables = {"offset":0,"network":"bsc","address":wallet,"from":null,"till":null,"dateFormat":"%Y-%m"}
+  let variables = {
+    offset: 0,
+    network: "bsc",
+    address: wallet,
+    from: null,
+    till: null,
+    dateFormat: "%Y-%m",
+  };
 
   return await axios({
     method: "post",
@@ -392,7 +411,6 @@ export async function getTokenTotalSupply(token, decimals) {
   }
 }
 
-
 export async function getTokenToBnb(pair, balance) {
   try {
     var pairContract = await new web3.eth.Contract(abi, pair);
@@ -410,7 +428,6 @@ export async function getTokenToBnb(pair, balance) {
     let reserve1 = parseFloat(
       convertDecimal(reserves.reserve1, token1Decimals).toFixed()
     );
-
 
     let val = 1 / (reserve1 / reserve0);
 

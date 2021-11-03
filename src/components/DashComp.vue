@@ -117,102 +117,84 @@
               </v-card-text>
             </v-card>
           </v-col>
+          <v-col col="12" md="6">
+            <v-card
+              class="card-gradient"
+              dark
+              color="#ffffff"
+              elevation="2"
+              :loading="loadingDev"
+            >
+              <v-card-title class="headline font-weight-bold">
+                Dev Wallet Balance
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="white"
+                  icon
+                  @click="fetchDev"
+                  :disabled="loadingDev"
+                >
+                  <v-icon>mdi-refresh</v-icon>
+                </v-btn>
+                <v-btn
+                  color="white"
+                  icon
+                  href="https://bscscan.com/address/0xcBce3EB5273691A79D2f9b9f531359D75fDffFd9"
+                  target="_blank"
+                >
+                  <v-icon>mdi-wallet-outline</v-icon>
+                </v-btn>
+              </v-card-title>
+              <v-card-text class="c-card__text text-weight-600">{{
+                balanceDev
+              }}</v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card
+              class="card-gradient"
+              dark
+              color="#ffffff"
+              elevation="10"
+              :loading="loadingLiq"
+            >
+              <v-card-title class="headline font-weight-bold"
+                >Liquidity Locked Until
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="white"
+                  icon
+                  href="https://www.pinksale.finance/#/pinklock/record/655?chain=BSC"
+                  target="_blank"
+                >
+                  <v-icon>mdi-lock-clock</v-icon>
+                </v-btn>
+              </v-card-title>
+              <v-card-text class="c-card__text text-weight-600">{{
+                timer
+              }}</v-card-text>
+            </v-card>
+          </v-col>
         </v-row>
       </v-col>
-      <v-col col="12" md="6">
-        <v-card
-          class="card-gradient"
-          dark
-          color="#ffffff"
-          elevation="2"
-          :loading="loadingMarket"
-        >
-          <v-card-title class="headline font-weight-bold">
-            Marketing Wallet Balance
-            <v-spacer></v-spacer>
-            <v-btn
-              color="white"
-              icon
-              @click="fetchMarketing"
-              :disabled="loadingMarket"
-            >
-              <v-icon>mdi-refresh</v-icon>
-            </v-btn>
-            <v-btn
-              color="white"
-              icon
-              href="https://bscscan.com/address/0x19646DBC05bA6F7D3c950EAf4Fc7A615240582b7"
-              target="_blank"
-            >
-              <v-icon>mdi-wallet-outline</v-icon>
-            </v-btn>
-          </v-card-title>
-          <v-card-text class="c-card__text text-weight-600">{{
-            balanceMarketing
-          }}</v-card-text>
-        </v-card>
-
-        <h4 class="my-6">Marketing Wallet Transactions</h4>
-        <v-data-table
-          dark
-          class="elevation-1 mytable"
-          @click:row="handleClick"
-          :items-per-page="6"
-          fixed-header
-          :loading="loadingMarket"
-          :headers="headersMarketing"
-          :items="marketingTxsData"
-          :item-class="row_classes"
-          :footer-props="{
-            'items-per-page-options': [6],
-          }"
-        ></v-data-table>
-      </v-col>
-      <v-col col="12" md="6">
-        <v-card
-          class="card-gradient"
-          dark
-          color="#ffffff"
-          elevation="2"
-          :loading="loadingDev"
-        >
-          <v-card-title class="headline font-weight-bold">
-            Dev Wallet Balance
-            <v-spacer></v-spacer>
-            <v-btn color="white" icon @click="fetchDev" :disabled="loadingDev">
-              <v-icon>mdi-refresh</v-icon>
-            </v-btn>
-            <v-btn
-              color="white"
-              icon
-              href="https://bscscan.com/address/0xcBce3EB5273691A79D2f9b9f531359D75fDffFd9"
-              target="_blank"
-            >
-              <v-icon>mdi-wallet-outline</v-icon>
-            </v-btn>
-          </v-card-title>
-          <v-card-text class="c-card__text text-weight-600">{{
-            balanceDev
-          }}</v-card-text>
-        </v-card>
-
-        <h4 class="my-6">Dev Wallet Transactions</h4>
-        <v-data-table
-          dark
-          class="elevation-1 mytable"
-          @click:row="handleClick"
-          :items-per-page="6"
-          fixed-header
-          :loading="loadingDev"
-          :headers="headersMarketing"
-          :items="DevTxsData"
-          :item-class="row_classes"
-          :footer-props="{
-            'items-per-page-options': [6],
-          }"
-        ></v-data-table>
-      </v-col>
     </v-row>
+    <v-col col="12">
+      <h4 class="my-6">Dev Wallet Transactions</h4>
+      <v-data-table
+        dark
+        class="elevation-1 mytable"
+        @click:row="handleClick"
+        :items-per-page="6"
+        fixed-header
+        :loading="loadingDev"
+        :headers="headersDev"
+        :items="DevTxsData"
+        :item-class="row_classes"
+        :footer-props="{
+          'items-per-page-options': [6],
+        }"
+      ></v-data-table>
+    </v-col>
   </v-container>
 </template>
 
@@ -235,7 +217,7 @@ import {
 export default {
   data: () => ({
     infoIcon: mdiInformationOutline,
-    headersMarketing: [
+    headersDev: [
       {
         text: "Block",
         align: "start",
@@ -249,14 +231,12 @@ export default {
     burnt: 0,
     burntPerc: 0,
     balance: 0,
-    balanceMarketing: 0,
     balanceDev: 0,
     balanceLiq: 0,
     balanceBUSD: 0,
     balanceBUSDUSD: 0,
     circSup: 0,
     loading: false,
-    loadingMarket: false,
     loadingDev: false,
     loadingLiq: false,
     loadingBUSD: false,
@@ -268,20 +248,47 @@ export default {
     current: 0,
     transactionBalance: null,
     txs: [],
-    marketingTxsData: [],
+    DevTxsData: [],
     resetTxs: false,
+    interval: null,
+    timer: "",
   }),
 
   mounted() {
     this.wallet = "0x35E583bD317D611b51FEdAaaedcaC4a4ECe6C711";
     this.fetchData();
     this.fetchBUSD();
-    this.fetchMarketing();
     this.fetchDev();
     this.fetchLiq();
   },
-  created() {},
+  created() {
+    setInterval(this.countDown, 1000);
+  },
   methods: {
+    countDown() {
+      let countDownDate = new Date("2022-10-26T16:48:57Z").getTime();
+
+      let now = new Date().getTime();
+
+      let distance = countDownDate - now;
+
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      this.timer = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval();
+        this.timer = "Liquidity Unlocked!";
+      }
+      return {
+        timer: this.timer,
+      };
+    },
     row_classes(item) {
       return item.type;
     },
@@ -321,59 +328,6 @@ export default {
       this.loading = false;
     },
 
-    async fetchMarketing() {
-      this.loadingMarket = true;
-      let Marketing = await inFlowTxs(
-        "0x19646DBC05bA6F7D3c950EAf4Fc7A615240582b7"
-      );
-
-      let marketingTxsData = [];
-      Marketing.data.data.ethereum.transfers.map(async (mtxItem) => {
-        let mtxRow = {
-          type: "buy",
-          hash: mtxItem.transaction.hash,
-          transferAmount: this.numberWithCommas(
-            parseFloat(mtxItem.amount).toFixed(2)
-          ),
-          timestamp: mtxItem.block.timestamp.time,
-          block: mtxItem.block.height,
-          currency: mtxItem.currency.symbol,
-        };
-        marketingTxsData.push(mtxRow);
-      });
-      let MarketingOut = await outFlowTxs(
-        "0x19646DBC05bA6F7D3c950EAf4Fc7A615240582b7"
-      );
-      MarketingOut.data.data.ethereum.transfers.map(async (mtxItem) => {
-        let mtxRow = {
-          type: "sell",
-          hash: mtxItem.transaction.hash,
-          transferAmount: this.numberWithCommas(
-            parseFloat(mtxItem.amount * -1).toFixed(2)
-          ),
-          timestamp: mtxItem.block.timestamp.time,
-          block: mtxItem.block.height,
-          currency: mtxItem.currency.symbol,
-        };
-        marketingTxsData.push(mtxRow);
-      });
-      let txsMTable = marketingTxsData.sort(function (a, b) {
-        return new Date(b.timestamp) - new Date(a.timestamp);
-      });
-      this.marketingTxsData = txsMTable;
-      let bnbToUsd = await getBnbToUsd();
-      let MBalance = await this.axios({
-        method: "get",
-        url: "https://api.bscscan.com/api?module=account&action=balance&address=0x19646DBC05bA6F7D3c950EAf4Fc7A615240582b7&tag=latest&apikey=KHPI6CP43KFGJ8WD1EA1DVS824VJSA41UM",
-      });
-      MBalance = await convertDecimal(MBalance.data.result, 18).toFixed(2);
-      let totalUsd = MBalance * bnbToUsd;
-      this.balanceMarketing = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(parseFloat(totalUsd).toFixed(2));
-      this.loadingMarket = false;
-    },
     async fetchDev() {
       this.loadingDev = true;
       let Dev = await inFlowTxs("0xcBce3EB5273691A79D2f9b9f531359D75fDffFd9");
@@ -468,6 +422,7 @@ export default {
       let tokenToBnbResp = await getTokenToBnb(pair, balance);
 
       let tokenToBnb = tokenToBnbResp.price;
+      console.log(tokenToBnb);
       let exchangeVal = tokenToBnbResp.exchangeVal;
 
       if (tokenToBnb == null) {
@@ -518,7 +473,7 @@ export default {
           currency: "USD",
         }).format(balanceUsd),
         balanceUsdNum: balanceUsd,
-        current: (tokenToBnb * bnbToUsd * 1).toFixed(12),
+        current: (tokenToBnb * bnbToUsd * 1).toFixed(14),
         cap: vm.numberWithCommas(parseFloat(cap).toFixed(2)),
         address: token,
         supply: supply,

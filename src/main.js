@@ -6,6 +6,7 @@ import router from "./router";
 import vuetify from "./plugins/vuetify";
 import VueParticles from "vue-particles";
 import "./registerServiceWorker";
+import './registerServiceWorker'
 
 const instance = axios.create({});
 

@@ -288,7 +288,7 @@ html {
   border-radius: 12px 12px 12px 12px;
   box-shadow: 0px -5px 10px 10px rgba(0, 0, 0, 0.05) inset;
   padding: 20px 33px 20px 33px;
-  z-index: 1;
+  z-index: 1 !important ;
 }
 
 #app
@@ -314,7 +314,7 @@ html {
   border-radius: 12px 12px 12px 12px;
   box-shadow: 0px -5px 10px 10px rgba(0, 0, 0, 0.05) inset;
   padding: 8px 18px 8px 18px;
-  z-index: 1;
+  z-index: 1 !important;
 }
 
 .theme--dark.v-label {
@@ -339,7 +339,7 @@ html {
   border-color: #ffffff;
   border-radius: 12px 12px 12px 12px;
   padding: 20px 33px 20px 33px;
-  z-index: 1;
+  z-index: 1 !important;
 }
 
 #app
@@ -353,7 +353,7 @@ html {
   > div.col-md-5.col-12
   > div:nth-child(1)
   > div:nth-child(3) {
-  z-index: 1;
+  z-index: 1 !important;
 }
 .v-application a {
   color: #fff !important;
@@ -366,7 +366,7 @@ html {
   background: linear-gradient(to right, #383437 55%, #4d464b 100%);
   opacity: 0.8;
 }
-.rank {
+#app > div > main > div > div > div.container.dark .rank {
   margin: 0 !important;
   padding: 10px 0 5px !important;
   background-color: #4a454921 !important;
@@ -374,6 +374,7 @@ html {
   border-color: #4a454921 !important;
   border-radius: 12px !important;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) !important;
+  z-index: 1 !important;
 }
 .theme--dark.v-data-table {
   margin: 0 !important;
@@ -384,62 +385,48 @@ html {
   border-radius: 12px !important;
   opacity: 0.8;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5) !important;
-  z-index: 1;
+  z-index: 1 !important;
 }
 
 .theme--dark.v-data-table.v-data-table--fixed-header thead th {
   background-color: #4a454921 !important;
-  z-index: 1;
+  z-index: 1 !important;
 }
 th .text-start .sortable {
   background: #4a454921 !important;
-  z-index: 1;
+  z-index: 1 !important;
 }
 th .text-start {
   background: #4a454921 !important;
-  z-index: 1;
+  z-index: 1 !important;
 }
 th .text-end .sortable {
   background: #4a454921 !important;
-  z-index: 1;
+  z-index: 1 !important;
 }
 th .text-end {
   background: #4a454921 !important;
-  z-index: 1;
+  z-index: 1 !important;
 }
 .v-data-table__mobile-row__cell {
   max-width: 30vw !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
-  z-index: 1;
-}
-#app
-  > div
-  > main
-  > div
-  > div
-  > div.container.dark
-  > div
-  > div
-  > div.col-md-6.col
-  > div.v-data-table.elevation-1.mytable.v-data-table--fixed-header.v-data-table--has-bottom.theme--dark
-  > div.v-data-footer
-  > div.v-data-footer__icons-before {
   z-index: 1 !important;
 }
-#app
-  > div
-  > main
-  > div
-  > div
-  > div.container.dark
-  > div
-  > div
-  > div.col-md-6.col
-  > div.v-data-table.elevation-1.mytable.v-data-table--fixed-header.v-data-table--has-bottom.theme--dark
-  > div.v-data-footer
-  > div.v-data-footer__icons-after {
+#app > div > main > div > div > div.container.dark > div > div.col > div > div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
+  z-index: 1 !important;
+}
+
+#app > div > main > div > div > div.container.dark > div > div.col > div > div.v-data-footer {
+  z-index: 1 !important;
+}
+
+#app > div > main > div > div > div.container.dark > div > div.col > div > div.v-data-footer > div.v-data-footer__icons-after > button {
+  z-index: 1 !important;
+}
+#app > div > main > div > div > div.container.dark > div > div.col > div > div.v-data-footer > div.v-data-footer__icons-after {
   z-index: 1 !important;
 }
 #app
@@ -531,6 +518,7 @@ div.v-card__title.headline.font-weight-bold {
   > tbody
   > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background: #4a454921;
+  z-index: 1 !important;
 }
 
 $progress-linear-stripe-gradient: linear-gradient(
@@ -565,7 +553,7 @@ $progress-linear-stripe-gradient: linear-gradient(
   box-shadow: 0px -5px 10px 10px rgba(0, 0, 0, 0.05) inset;
   padding: 20px 33px 20px 33px;
   opacity: 0.5;
-  z-index: 1;
+  z-index: 1 !important;
 }
 
 #app
@@ -588,7 +576,7 @@ $progress-linear-stripe-gradient: linear-gradient(
   border-radius: 12px 12px 12px 12px;
   padding: 20px 33px 20px 33px;
   opacity: 0.5;
-  z-index: 1;
+  z-index: 1 !important;
 }
 
 .m-auto {
@@ -613,6 +601,7 @@ $progress-linear-stripe-gradient: linear-gradient(
   > tr.sell:hover {
   color: #ff4081 !important;
   font-weight: 500;
+  z-index: 1 !important;
 }
 
 .theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr.buy,
@@ -629,6 +618,7 @@ $progress-linear-stripe-gradient: linear-gradient(
   > tr.buy:hover {
   color: #43ff41 !important;
   font-weight: 500;
+  z-index: 1 !important;
 }
 
 .theme--dark.v-data-table
@@ -644,6 +634,7 @@ $progress-linear-stripe-gradient: linear-gradient(
   > tr:not(:last-child)
   > th:last-child {
   border-bottom: thin solid #ffffff;
+  z-index: 1 !important;
 }
 
 .c-title {
@@ -708,6 +699,12 @@ $progress-linear-stripe-gradient: linear-gradient(
     > div.v-image__image.v-image__image--contain {
     width: 75% !important;
   }
+
+  .v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+    .v-data-table > .v-data-table__wrapper > table > thead > tr > td,
+    .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td {
+      z-index: 1 !important;
+    }
 }
 @media screen and (max-width: 767px) {
   #app
@@ -785,27 +782,27 @@ $progress-linear-stripe-gradient: linear-gradient(
     .theme--dark.v-data-table.v-data-table--fixed-header thead th {
       background-color: #4a454921 !important;
       font-size: 0.6rem !important;
-      z-index: 1;
+      z-index: 1 !important;
     }
     th .text-start .sortable {
       font-size: 0.6rem !important;
       background: #4a454921 !important;
-      z-index: 1;
+      z-index: 1 !important;
     }
     th .text-start {
       font-size: 0.6rem !important;
       background: #4a454921 !important;
-      z-index: 1;
+      z-index: 1 !important;
     }
     th .text-end .sortable {
       font-size: 0.6rem !important;
       background: #4a454921 !important;
-      z-index: 1;
+      z-index: 1 !important;
     }
     th .text-end {
       font-size: 0.6rem !important;
       background: #4a454921 !important;
-      z-index: 1;
+      z-index: 1 !important;
     }
     .v-data-table__mobile-row__cell {
       font-size: 0.6rem !important;
@@ -813,7 +810,7 @@ $progress-linear-stripe-gradient: linear-gradient(
       white-space: nowrap !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
-      z-index: 1;
+      z-index: 1 !important;
     }
     .v-data-table > .v-data-table__wrapper .v-data-table__mobile-row {
       height: 35px !important;

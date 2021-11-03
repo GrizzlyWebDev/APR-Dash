@@ -73,6 +73,31 @@
               dark
               color="#ffffff"
               elevation="10"
+              :loading="loadingLiq"
+            >
+              <v-card-title class="headline font-weight-bold">
+                Liquidity Pool Balance
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="white"
+                  icon
+                  href="https://bscscan.com/address/0xdD7ADC6554571771efC382C6420f96170491EacC"
+                  target="_blank"
+                >
+                  <v-icon>mdi-wallet-outline</v-icon>
+                </v-btn>
+              </v-card-title>
+              <v-card-text class="c-card__text text-weight-600">
+                {{ balanceLiq }}
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card
+              class="card-gradient"
+              dark
+              color="#ffffff"
+              elevation="10"
               :loading="loadingBUSD"
             >
               <v-card-title class="headline font-weight-bold">
@@ -100,21 +125,21 @@
               elevation="10"
               :loading="loadingLiq"
             >
-              <v-card-title class="headline font-weight-bold">
-                Liquidity Pool Balance
+              <v-card-title class="headline font-weight-bold"
+                >Liquidity Locked Until
                 <v-spacer></v-spacer>
                 <v-btn
                   color="white"
                   icon
-                  href="https://bscscan.com/address/0xdD7ADC6554571771efC382C6420f96170491EacC"
+                  href="https://www.pinksale.finance/#/pinklock/record/655?chain=BSC"
                   target="_blank"
                 >
-                  <v-icon>mdi-wallet-outline</v-icon>
+                  <v-icon>mdi-lock-clock</v-icon>
                 </v-btn>
               </v-card-title>
-              <v-card-text class="c-card__text text-weight-600">
-                {{ balanceLiq }}
-              </v-card-text>
+              <v-card-text class="c-card__text text-weight-600">{{
+                timer
+              }}</v-card-text>
             </v-card>
           </v-col>
           <v-col col="12" md="6">
@@ -150,34 +175,7 @@
               }}</v-card-text>
             </v-card>
           </v-col>
-          <v-col cols="12" md="6">
-            <v-card
-              class="card-gradient"
-              dark
-              color="#ffffff"
-              elevation="10"
-              :loading="loadingLiq"
-            >
-              <v-card-title class="headline font-weight-bold"
-                >Liquidity Locked Until
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="white"
-                  icon
-                  href="https://www.pinksale.finance/#/pinklock/record/655?chain=BSC"
-                  target="_blank"
-                >
-                  <v-icon>mdi-lock-clock</v-icon>
-                </v-btn>
-              </v-card-title>
-              <v-card-text class="c-card__text text-weight-600">{{
-                timer
-              }}</v-card-text>
-            </v-card>
-          </v-col>
         </v-row>
-      </v-col>
-    </v-row>
     <v-col col="12">
       <h4 class="my-6">Dev Wallet Transactions</h4>
       <v-data-table
@@ -195,6 +193,8 @@
         }"
       ></v-data-table>
     </v-col>
+    </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -422,7 +422,6 @@ export default {
       let tokenToBnbResp = await getTokenToBnb(pair, balance);
 
       let tokenToBnb = tokenToBnbResp.price;
-      console.log(tokenToBnb);
       let exchangeVal = tokenToBnbResp.exchangeVal;
 
       if (tokenToBnb == null) {
